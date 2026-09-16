@@ -123,6 +123,12 @@ def resolve_args(args_list, img_dir: Path) -> list:
 
 def flash_once(cfg: dict, console: UbootConsole, args, log) -> None:
     interrupt_uboot(console, cfg, log)
+    # 可选的 fastboot 前 uboot 命令（如 setenv 静态 IP，解决默认环境 DHCP 超时）
+    for cmd in cfg.get("uboot_cmds", []):
+        console.clear_buffer()
+        console.send_line(cmd)
+        console.wait_for(cfg["prompt_pattern"], 5)
+        log(f"uboot: {cmd}")
     target = enter_fastboot(console, cfg, log)
 
     cmds = cfg["commands"]
