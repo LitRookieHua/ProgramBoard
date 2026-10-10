@@ -1,0 +1,11 @@
+{
+  "uboot_baudrate": 921600,
+  "interrupt_keyword": "Hit any key to stop autoboot",
+  "prompt_pattern": "Hobot[$#]",
+  "fastboot_ready_pattern": "Listening for fastboot command",
+  "commands": [
+    {"type": "fastboot", "args": ["oem", "interface:mtd"]},
+    {"type": "fastboot", "args": ["flash", "MCU_a", "int_rpu_arm8r5_arm_j02_gnu.img"]},
+    {"type": "fastboot", "args": ["flash", "MCU_b", "int_rpu_arm8r5_arm_j02_gnu.img"]}
+  ]
+}
