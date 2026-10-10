@@ -1,7 +1,7 @@
 """J6B 固件刷写主流程。
 
 用法:
-  python flash_j6b.py --port COM7 [--psu-com COM5] [--config xxx.json]
+  python ProgramBoard_j6b.py --port COM7 [--psu-com COM5] [--config xxx.json]
                       [--img-dir <dir>] [--retries 3] [--dry-run]
 """
 import argparse

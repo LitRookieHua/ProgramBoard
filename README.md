@@ -18,13 +18,13 @@
 ## 使用
 
 ```bash
-cd Y:/01_Src/tools/flash
+cd Y:/01_Src/tools/ProgramBoard
 
 # 日常刷写（接电源）
-python flash_j6b.py --port COM30 --psu-com COM44
+python ProgramBoard_j6b.py --port COM30 --psu-com COM44
 
 # 不接电源（失败时提示人工断电，回车继续）
-python flash_j6b.py --port COM30
+python ProgramBoard_j6b.py --port COM30
 ```
 
 流程：断电冷启动(3s) → 20ms 周期发空格打断 uboot → `fastboot udp` → 解析板子 IP → `oem interface:mtd` → `flash MCU_a` → `flash MCU_b` → `fastboot reboot`。任一步失败自动断电重来，默认重试 3 次。退出码：0 成功 / 1 失败。
@@ -77,7 +77,7 @@ python flash_j6b.py --port COM30
 板子正常启动到 QNX 后，走 SSH 刷 OTA 整包（不动 uboot/fastboot）：
 
 ```bash
-cd Y:/01_Src/tools/flash
+cd Y:/01_Src/tools/ProgramBoard
 
 # 日常（板子已上电在线）
 python ota_j6b.py --port COM30
@@ -121,7 +121,7 @@ python ota_j6b.py --port COM30 --ota path/to/xxx.zip
 ## 模块结构
 
 ```
-flash_j6b.py       CLI 入口 + 主流程编排（打断/刷写/重试）
+ProgramBoard_j6b.py  CLI 入口 + 主流程编排（打断/刷写/重试）
 ota_j6b.py         OTA 整包刷写（SSH/SFTP + 校验 + ota_tool）
 uboot_console.py   串口监听、正则匹配、发送命令
 korad.py           KA3005P 电源控制（仅开关，电压固定 12V）
